@@ -17,6 +17,9 @@ def download_tiles(zoom, lat_start, lat_stop, lon_start, lon_stop, satellite=Tru
     
     user_agent = 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1'
     headers = { 'User-Agent' : user_agent }
+
+    dirname = 'z' + str(zoom)
+    os.mkdir(dirname)
     
     for x in xrange(start_x, stop_x):
         for y in xrange(start_y, stop_y):
@@ -31,7 +34,7 @@ def download_tiles(zoom, lat_start, lat_stop, lon_start, lon_stop, satellite=Tru
                 url = "http://mt1.google.com/vt/lyrs=h@162000000&hl=en&x=%d&s=&y=%d&z=%d" % (x, y, zoom)
                 filename = "%d_%d_%d_r.png" % (zoom, x, y)    
     
-            if not os.path.exists(filename):
+            if not os.path.exists(dirname + '/' + filename):
                 
                 bytes = None
                 
@@ -45,12 +48,12 @@ def download_tiles(zoom, lat_start, lat_stop, lon_start, lon_stop, satellite=Tru
                     sys.exit(1)
                 
                 if bytes.startswith("<html>"):
-                    print "-- forbidden", filename
+                    print "-- forbidden", dirname + '/' + filename
                     sys.exit(1)
                 
-                print "-- saving", filename
+                print "-- saving", dirname + '/' + filename
                 
-                f = open(filename,'wb')
+                f = open(dirname + '/' + filename,'wb')
                 f.write(bytes)
                 f.close()
                 
@@ -92,4 +95,4 @@ if __name__ == "__main__":
         zoom = args.zoom[0]
 
     print(lat_start)
-    download_tiles(zoom, lat_start, lat_stop, lon_start, lon_stop, satellite=True)
+    download_tiles(zoom, lat_start, lat_stop, lon_start, lon_stop, satellite=False)
