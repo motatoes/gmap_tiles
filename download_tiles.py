@@ -21,7 +21,10 @@ def download_tiles(zoom, lat_start, lat_stop, lon_start, lon_stop, satellite=Tru
     dirname = 'z' + str(zoom)
     try:
         os.mkdir(dirname)
-    
+    except:
+        pass
+
+ 
     for x in xrange(start_x, stop_x):
         for y in xrange(start_y, stop_y):
             
