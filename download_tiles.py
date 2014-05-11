@@ -77,16 +77,16 @@ if __name__ == "__main__":
     
     if args.lat_start is None \
          or args.lat_stop is None \
-	 or args.lon_start is None \
-	 or args.lon_stop is None:
+         or args.lon_start is None \
+         or args.lon_stop is None:
 
         print('NOTICE: one of the latitude or longitude arguments was not found') 
         print('using the default arguments')
 
-	lat_start, lon_start = 46.53, 6.6
-	lat_stop, lon_stop = 46.49, 6.7
+        lat_start, lon_start = 46.53, 6.6
+        lat_stop, lon_stop = 46.49, 6.7
     else:
-	lat_start = args.lat_start[0]
+        lat_start = args.lat_start[0]
         lat_stop = args.lat_stop[0]
         lon_start = args.lon_start[0]
         lon_stop = args.lon_stop[0]
